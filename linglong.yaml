@@ -1,0 +1,36 @@
+package:
+  id: "dde-control-center"
+  name: "dde-control-center"
+  version: 5.5.23
+  kind: lib
+  description: |
+    dde control center for deepin.
+
+runtime:
+  id: org.deepin.Runtime
+  version: 23.0.0
+
+depends:
+  - id: "dde-qt-dbus-factory"
+    version: 5.5.12
+  - id: googletest
+    version: 1.8.1
+  - id: "udisks2-qt5"
+    version: 5.0.3
+
+source:
+  kind: git
+  url: https://github.com/linuxdeepin/dde-control-center.git
+  commit: "5.5.23"
+
+build:
+  kind: manual
+  manual:
+    configure: |
+      #exec bash
+      mkdir build
+      cd build
+      cmake -DCMAKE_INSTALL_PREFIX=${PREFIX} \
+            -DCMAKE_INSTALL_LIBDIR=${PREFIX}/lib ..
+      make -j6
+      make -j install
